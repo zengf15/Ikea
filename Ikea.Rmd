@@ -1,0 +1,10 @@
+---
+title: "Ikea"
+author: "Fanyi Zeng"
+date: '2022-05-04'
+output: github_document
+---
+
+```{r data}
+ikea <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-03/ikea.csv')
+```
