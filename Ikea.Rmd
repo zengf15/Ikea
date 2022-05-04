@@ -5,6 +5,78 @@ date: '2022-05-04'
 output: github_document
 ---
 
-```{r data}
+```{r data, message = FALSE}
 ikea <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-03/ikea.csv')
 ```
+
+```{r pkg, message = FALSE}
+library(tidymodels)
+```
+
+Let's take a look at the distribution of price. The distribution is right/positively skewed. Most items are in the lower price range.
+
+```{r price}
+ikea %>%
+  ggplot(aes(x=price)) +
+  geom_histogram()
+```
+
+They are selling a lot of desks, chairs, and shelves.
+
+```{r category}
+ikea %>%
+  ggplot(aes(y=category)) +
+  geom_histogram(stat="count")
+```
+
+Sofas, desks, chairs, wardrobes are the more expensive items.
+
+```{r pricecat}
+ikea %>%
+  ggplot(aes(x=price,y=category)) +
+  geom_bar(stat="identity")
+```
+
+Most items are sellable online, so there won't be much value in comparing the prices between online and on-site items.
+
+```{r sell}
+ikea %>%
+  count(sellable_online)
+```
+
+On average, items that have other colors are more expensive (higher mean, median, and mode).
+
+```{r pricecol}
+ikea %>% 
+  filter(other_colors=="Yes") %>%
+  summary(price)
+ikea %>% 
+  filter(other_colors=="No") %>%
+  summary(price)
+```
+
+Indeed, there seems to be a positive, significant relationship between item price and whether it has other colors.
+
+```{r model}
+m <- lm(price ~ other_colors, ikea)
+summary(m)
+```
+
+In the lower price range, more items don't have colors. In the higher price range, more items have colors. 
+
+```{r pricecol2}
+ikea %>%
+  ggplot(aes(y=price,fill=other_colors)) +
+  geom_histogram(binwidth=500,position="fill")
+```
+
+Most colorful items: sofas, cabinets, room dividers, TV & media furniture. Least colorful items: trolleys, bar furniture, wardrobes.
+
+```{r catcol}
+ikea %>%
+  ggplot(aes(y=category,fill=other_colors)) +
+  geom_histogram(stat="count",position="fill")
+```
+
+Next time I shop at Ikea, I know where to look for those colorful items!
+
