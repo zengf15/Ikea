@@ -7,46 +7,9 @@ Fanyi Zeng
 ikea <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-03/ikea.csv')
 ```
 
-    ## New names:
-    ## * `` -> ...1
-
-    ## Rows: 3694 Columns: 14
-
-    ## -- Column specification --------------------------------------------------------
-    ## Delimiter: ","
-    ## chr (7): name, category, old_price, link, other_colors, short_description, d...
-    ## dbl (6): ...1, item_id, price, depth, height, width
-    ## lgl (1): sellable_online
-
-    ## 
-    ## i Use `spec()` to retrieve the full column specification for this data.
-    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
-
 ``` r
 library(tidymodels)
 ```
-
-    ## Registered S3 method overwritten by 'tune':
-    ##   method                   from   
-    ##   required_pkgs.model_spec parsnip
-
-    ## -- Attaching packages -------------------------------------- tidymodels 0.1.4 --
-
-    ## v broom        0.7.11     v recipes      0.2.0 
-    ## v dials        0.1.0      v rsample      0.1.1 
-    ## v dplyr        1.0.7      v tibble       3.1.6 
-    ## v ggplot2      3.3.5      v tidyr        1.1.4 
-    ## v infer        1.0.0      v tune         0.1.6 
-    ## v modeldata    0.1.1      v workflows    0.2.4 
-    ## v parsnip      0.1.7      v workflowsets 0.1.0 
-    ## v purrr        0.3.4      v yardstick    0.0.9
-
-    ## -- Conflicts ----------------------------------------- tidymodels_conflicts() --
-    ## x purrr::discard() masks scales::discard()
-    ## x dplyr::filter()  masks stats::filter()
-    ## x dplyr::lag()     masks stats::lag()
-    ## x recipes::step()  masks stats::step()
-    ## * Use suppressPackageStartupMessages() to eliminate package startup messages
 
 Let’s take a look at the distribution of price. The distribution is
 right/positively skewed. Most items are in the lower price range.
